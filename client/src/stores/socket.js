@@ -18,7 +18,7 @@ export const useSocketStore = defineStore('socket', {
         this.socket.disconnect()
       }
       
-      this.socket = io('http://localhost:3001')
+      this.socket = io(import.meta.env.VITE_SERVER_URL || 'http://localhost:3001')
       
       this.socket.on('connect', () => {
         this.isConnected = true
@@ -93,7 +93,8 @@ export const useSocketStore = defineStore('socket', {
       formData.append('file', file)
       
       try {
-        const response = await axios.post('http://localhost:3001/upload', formData, {
+        const serverUrl = import.meta.env.VITE_SERVER_URL || 'http://localhost:3001'
+        const response = await axios.post(`${serverUrl}/upload`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data'
           }

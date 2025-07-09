@@ -160,7 +160,7 @@ export default {
             type: 'file',
             userId: userId.value,
             filename: fileData.originalname,
-            fileUrl: `http://localhost:3001/download/${fileData.filename}`,
+            fileUrl: `${import.meta.env.VITE_SERVER_URL || 'http://localhost:3001'}/download/${fileData.filename}`,
             fileSize: fileData.size,
             timestamp: new Date().toISOString()
           }
